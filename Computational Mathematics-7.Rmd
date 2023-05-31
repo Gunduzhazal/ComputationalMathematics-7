@@ -1,0 +1,89 @@
+
+## Data 605 - Assignment 7
+
+**Hazal Gunduz**
+
+**1.** Let $X_{1}$, $X_{2}$, . . . , $X_{n}$ be n mutually independent random variables, each of which is uniformly distributed on the integers from 1 to k. Let Y denote the minimum of the $X_{i}$’s. Find the distribution of Y.
+
+Found this helpful [link] ("https://math.dartmouth.edu/archive/m20f10/public_html/HW5Solutions.pdf") for understanding the way of solution.
+
+Y denote the minimum of the $X_{i}$’s and each independent random variable $X_{i}$ has k possibilities.
+
+Since Y is the minimum value of $X_{i}$ over all of the$X_{i}$’s, then to find the distribution function m(j) = P(Y = j), we will need to count the number of ways that we can assign $X_{1}$, $X_{2}$, ..., $X_{n}$ to values between j and k with at least one $X_{i}$ being assigned to j and divide by the total number of possible ways to assign $X_{1}$, $X_{2}$, ..., $X_{n}$ to values between 1 and k.
+
+$X_{i}$ has k possibilities: 1, 2, ..., k. Then, the total possible number of assignments for the entire collection $X_{1}$, $X_{2}$, ..., $X_{n}$ will be $k^{n}$
+
+The number of ways of getting Y = 1 is $k^{n}$ − $(k − 1)^n$, since $k^{n}$ represents the total number of options and $(k-1)^{n}$ represents all of the options where none of the $X_{i}$’s are equal to 1.
+
+Therefore the solution is: 1 ≤ j ≤ k, m(j) = $\frac{(k - j + 1)^n - (k - j)^n}{k^n}$
+
+**2.** Your organization owns a copier (future lawyers, etc.) or MRI (future doctors). This machine has a manufacturer’s expected lifetime of 10 years. This means that we expect one failure every ten years. (Include the probability statements and R Code for each part.).
+
+**a.** What is the probability that the machine will fail after 8 years?. Provide also the expected value and standard deviation. **Model as a geometric.** (Hint: the probability is equivalent to not failing during the first 8 years..)
+
+```{r}
+p <- 0.1
+pgeom(8, p, lower.tail = F)
+```
+
+```{r}
+expected <- 1/p
+expected
+```
+
+```{r}
+sd <- sqrt(((1-p) / p^2))
+sd
+```
+
+**b.** What is the probability that the machine will fail after 8 years?. Provide also the expected value and standard deviation. **Model as an exponential.** 
+
+```{r}
+pexp(8, p, lower.tail = F)
+```
+
+```{r}
+expected <- 1/p
+expected
+```
+
+```{r}
+sd <- sqrt(p^-2)
+sd
+```
+
+**c.** What is the probability that the machine will fail after 8 years?. Provide also the expected value and standard deviation. **Model as a binomial.** (Hint: 0 success in 8 years) 
+
+```{r}
+pbinom(0, 8, p)
+```
+
+```{r}
+expected <- 8 * p
+expected
+```
+
+```{r}
+sd <- sqrt(8 * p * (1-p))
+sd
+```
+
+**d.** What is the probability that the machine will fail after 8 years?. Provide also the expected value and standard deviation. **Model as a Poisson.**
+
+```{r}
+ppois(0, 8/10)
+```
+
+```{r}
+expected <- 8/10
+expected
+```
+
+```{r}
+sd <- sqrt(expected)
+sd
+```
+
+Rpubs =>  https://rpubs.com/gunduzhazal/1014554
+
+
